@@ -1,4 +1,4 @@
-let population = {
+let paro2020T2 = {
     "albacete":     17.41,
     "alicante":     18.41,
     "almeria":      20.21,
@@ -53,6 +53,6 @@ let population = {
     "melilla":      23.37,
 }
 
-/* source: INE Población 2019
- * https://www.ine.es/jaxiT3/Tabla.htm?t=2852
+/* source: INE Tasas de actividad, paro y empleo por provincia y sexo 2020T2
+ * https://www.ine.es/jaxiT3/Tabla.htm?t=3996
  */

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spain in Bits</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin=""/>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
@@ -15,11 +15,16 @@
 <body>
     <div id="map-area">
     </div>
-    <button onclick="map.remove(); generate('population')">Gen2</button>
-    <button onclick="alterStyle()">Alter</button>
+    <button onclick="map.remove(); generate('population')">Pop</button>
+    <button onclick="map.remove(); generate('unemployment')">Unem</button>
+    <button onclick="map.remove(); generate('diff_ocupacion')">Diff</button>
+    <button onclick="map.remove(); generate('life_expectancy')">LifeExp</button>
 </body>
 <script type="text/javascript" src="js/spain_provs.js"></script>
 <script type="text/javascript" src="js/datasets/population.js"></script>
+<script type="text/javascript" src="js/datasets/paro2020T2.js"></script>
+<script type="text/javascript" src="js/datasets/diff_ocupacion.js"></script>
+<script type="text/javascript" src="js/datasets/life_expectancy2019.js"></script>
 <script type="text/javascript" src="js/map_generation.js"></script>
 <script>window.onload = generate('population')</script>
 </html>
