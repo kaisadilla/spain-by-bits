@@ -1,0 +1,58 @@
+let population = {
+    "albacete":     
+    "alicante":     
+    "almeria":      
+    "alava":        
+    "asturias":     
+    "avila":        
+    "badajoz":      
+    "baleares":     
+    "barcelona":    
+    "vizcaya":      
+    "burgos":       
+    "caceres":      
+    "cadiz":        
+    "cantabria":    
+    "castellon":    
+    "ciudad_real":  
+    "cordoba":      
+    "coruna":       
+    "cuenca":       
+    "guipuzcoa":    
+    "girona":       
+    "granada":      
+    "guadalajara":  
+    "huelva":       
+    "huesca":       
+    "jaen":         
+    "leon":         
+    "lleida":       
+    "lugo":         
+    "madrid":       
+    "malaga":       
+    "murcia":       
+    "navarra":      
+    "ourense":      
+    "palencia":     
+    "gran_canaria": 
+    "pontevedra":   
+    "rioja":        
+    "salamanca":    
+    "tenerife":     
+    "segovia":      
+    "sevilla":      
+    "soria":        
+    "tarragona":    
+    "teruel":       
+    "toledo":       
+    "valencia":     
+    "valladolid":   
+    "zamora":       
+    "zaragoza":     
+    "ceuta":        
+    "melilla":      
+}
+
+/* source: INE Población 2019
+ * https://www.ine.es/jaxiT3/Tabla.htm?t=2852
+ */

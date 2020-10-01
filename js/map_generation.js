@@ -1,6 +1,16 @@
-function generate() {
+let map;
+let geojson;
+let info;
+let legend;
+let style;
+
+function generate (dataset) {
+    if (dataset === "population") generatePopulation();
+}
+
+function generatePopulation() {
     console.log("Gen");
-    let map = L.map('map-area', {
+    map = L.map('map-area', {
         zoomSnap: 0.1
     }).setView([39.97, -2.90], 6.5);
     
@@ -25,7 +35,7 @@ function generate() {
         else                      return "#800026";
     }
 
-    function style(feature) {
+    function style (feature) {
         return {
             weight: 1,
             opacity: 1,
@@ -63,12 +73,12 @@ function generate() {
         });
     }
 
-    let geojson = L.geoJson(provincesData, {
+    geojson = L.geoJson(provincesData, {
         style: style,
         onEachFeature: onEachFeature
     }).addTo(map);
 
-    let info = L.control();
+    info = L.control();
 
     info.onAdd = function(_) {
         this.div = L.DomUtil.create("div", "info");
@@ -94,7 +104,7 @@ function generate() {
 
     info.addTo(map);
 
-    let legend = L.control({position: "bottomright"});
+    legend = L.control({position: "bottomright"});
 
     legend.onAdd = function (_) {
         let div = L.DomUtil.create("div", "info legend");
