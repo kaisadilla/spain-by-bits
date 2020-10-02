@@ -1,0 +1,29 @@
+Life expectancy
+Workload
+Gender Pay Gap
+Children in private schools
+Pigs / Cows / Sheep
+Alternative political parties (not PP / PSOE)
+Early school leavers
+Olympic medals
+Cars
+Crime stats
+Bicycle use
+Millionaires
+High School
+Municipal debt
+Fast Internet
+Organs
+Living Space
+People in need of care
+Foreigners
+Forest
+Average age
+Hours of sunshine + Rain
+
+Fathers on parental leave
+
+Caravanas (RBs)
+
+scales for charts:
+https://learnui.design/tools/data-color-picker.html#single
