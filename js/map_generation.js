@@ -35,6 +35,9 @@ function generate (dataset) {
     if (dataset === "temperature") generateTemperature();
     if (dataset === "sun_hours") generateSunHours();
     if (dataset === "average_age") generateAverageAge();
+    if (dataset === "immigrantion") generateImmigrantion();
+    if (dataset === "vehicles") generateVehicles();
+    if (dataset === "companies") generateCompanies();
 }
 
 function findById (id) {
@@ -214,7 +217,7 @@ function generateDiffOcupacion() {
             this.div.innerHTML = `
             <h4>Desigualdad de empleo</h4>
             <strong>${props.name}</strong> <br />
-            ${(diffOcupacion2020T2[props.id] * 100).toFixed(1)}%
+            ${(diffOcupacion2020T2[props.id] * 100).toFixed(1)} %
             `
         }
         else {
@@ -585,6 +588,177 @@ function generateAverageAge() {
             <i style = "background: ${getColor(46.0)}"></i> < 47.5 años <br />
             <i style = "background: ${getColor(47.5)}"></i> < 49 años   <br />
             <i style = "background: ${getColor(49.0)}"></i> 49+ años    <br />
+        `;
+
+        return div;
+    }
+
+    legend.addTo(map);
+}
+
+function generateImmigrantion() {
+    getColor = function (val) {
+        if      (val < 0.03)  return "#fff3de";
+        else if (val < 0.06)  return "#ffeac6";
+        else if (val < 0.09)  return "#ffe0af";
+        else if (val < 0.12)  return "#ffd698";
+        else if (val < 0.14)  return "#ffcb7a";
+        else if (val < 0.17)  return "#ffbf5c";
+        else if (val < 0.20)  return "#ffb23a";
+        else                  return "#ffa600";
+    }
+
+    setStyleSource(immigrationPerc2019);
+
+    generateMap();
+
+    info.update = function(props) {
+        if (props) {
+            this.div.innerHTML = `
+            <h4>% de inmigrantes</h4>
+            <strong>${props.name}</strong> <br />
+            ${(immigrationPerc2019[props.id] * 100).toFixed(1)} %
+            `
+        }
+        else {
+            this.div.innerHTML = `
+            <h4>% de inmigrantes</h4>
+            Coloca el cursor sobre una provincia.
+            `
+        }
+    }
+
+    info.addTo(map);
+
+    legend = L.control({position: "bottomright"});
+
+    legend.onAdd = function (_) {
+        let div = L.DomUtil.create("div", "info legend");
+
+        div.innerHTML += `
+            <b>% de inmigrantes</b><br />
+            <i style = "background: ${getColor(0)   }"></i> < 3 %  <br />
+            <i style = "background: ${getColor(0.03)}"></i> < 6 %  <br />
+            <i style = "background: ${getColor(0.06)}"></i> < 9 %  <br />
+            <i style = "background: ${getColor(0.09)}"></i> < 12 % <br />
+            <i style = "background: ${getColor(0.12)}"></i> < 14 % <br />
+            <i style = "background: ${getColor(0.14)}"></i> < 17 % <br />
+            <i style = "background: ${getColor(0.17)}"></i> < 20 % <br />
+            <i style = "background: ${getColor(0.20)}"></i> 20+ %  <br />
+        `;
+
+        return div;
+    }
+
+    legend.addTo(map);
+}
+
+function generateVehicles() {
+    getColor = function (val) {
+        if      (val < 0.6150)  return "#e3ffe9";
+        else if (val < 0.6625)  return "#d2fddb";
+        else if (val < 0.7100)  return "#c1facd";
+        else if (val < 0.7575)  return "#b0f7bf";
+        else if (val < 0.8050)  return "#95f3aa";
+        else if (val < 0.8525)  return "#78ee94";
+        else if (val < 0.90)    return "#55e97e";
+        else                    return "#19e366";
+    }
+
+    setStyleSource(vehiclesPC2019);
+
+    generateMap();
+
+    info.update = function(props) {
+        if (props) {
+            this.div.innerHTML = `
+            <h4>Vehículos por habitante</h4>
+            <strong>${props.name}</strong> <br />
+            ${(vehiclesPC2019[props.id] * 100).toFixed(1)} %
+            `
+        }
+        else {
+            this.div.innerHTML = `
+            <h4>Vehículos por habitante</h4>
+            Coloca el cursor sobre una provincia.
+            `
+        }
+    }
+
+    info.addTo(map);
+
+    legend = L.control({position: "bottomright"});
+
+    legend.onAdd = function (_) {
+        let div = L.DomUtil.create("div", "info legend");
+
+        div.innerHTML += `
+            <b>Vehículos por habitante</b><br />
+            <i style = "background: ${getColor(0)     }"></i> < 61.5 %  <br />
+            <i style = "background: ${getColor(0.6150)}"></i> < 66.25 % <br />
+            <i style = "background: ${getColor(0.6625)}"></i> < 71 %    <br />
+            <i style = "background: ${getColor(0.7100)}"></i> < 75.75 % <br />
+            <i style = "background: ${getColor(0.7575)}"></i> < 80.5 %  <br />
+            <i style = "background: ${getColor(0.8050)}"></i> < 85.25 % <br />
+            <i style = "background: ${getColor(0.8525)}"></i> < 90 %    <br />
+            <i style = "background: ${getColor(0.9000)}"></i> 90+ %     <br />
+        `;
+
+        return div;
+    }
+
+    legend.addTo(map);
+}
+
+function generateCompanies() {
+    getColor = function (val) {
+        if      (val < 0.050)  return "#dbf7ff";
+        else if (val < 0.055)  return "#b4e2f2";
+        else if (val < 0.060)  return "#88cae8";
+        else if (val < 0.065)  return "#5db1e0";
+        else if (val < 0.070)  return "#008bd2";
+        else if (val < 0.075)  return "#0064c1";
+        else if (val < 0.080)  return "#003ba8";
+        else                 return "#0b0085";
+    }
+
+    setStyleSource(companiesPC2019);
+
+    generateMap();
+
+    info.update = function(props) {
+        if (props) {
+            this.div.innerHTML = `
+            <h4>Empresas / 100 hab. </h4>
+            <strong>${props.name}</strong> <br />
+            ${(companiesPC2019[props.id] * 100).toFixed(1)} empresas / 100 hab.
+            `
+        }
+        else {
+            this.div.innerHTML = `
+            <h4>Empresas / 100 hab. </h4>
+            Coloca el cursor sobre una provincia.
+            `
+        }
+    }
+
+    info.addTo(map);
+
+    legend = L.control({position: "bottomright"});
+
+    legend.onAdd = function (_) {
+        let div = L.DomUtil.create("div", "info legend");
+
+        div.innerHTML += `
+            <b>Empresas / 100 hab. </b><br />
+            <i style = "background: ${getColor(0)    }"></i> < 5 emp.   <br />
+            <i style = "background: ${getColor(0.050)}"></i> < 5.5 emp. <br />
+            <i style = "background: ${getColor(0.055)}"></i> < 6 emp.   <br />
+            <i style = "background: ${getColor(0.060)}"></i> < 6.5 emp. <br />
+            <i style = "background: ${getColor(0.065)}"></i> < 7 emp.   <br />
+            <i style = "background: ${getColor(0.070)}"></i> < 7.5 emp. <br />
+            <i style = "background: ${getColor(0.075)}"></i> < 8 emp.   <br />
+            <i style = "background: ${getColor(0.080)}"></i> 8+ emp.    <br />
         `;
 
         return div;
