@@ -33,6 +33,8 @@ function generate (dataset) {
     if (dataset === "average_salary") generateAverageSalary();
     if (dataset === "rain") generateRain();
     if (dataset === "temperature") generateTemperature();
+    if (dataset === "sun_hours") generateSunHours();
+    if (dataset === "average_age") generateAverageAge();
 }
 
 function findById (id) {
@@ -469,6 +471,120 @@ function generateTemperature() {
             <i style = "background: ${getColor(18.0)}"></i> < 19.5 °C <br />
             <i style = "background: ${getColor(19.5)}"></i> < 21 °C <br />
             <i style = "background: ${getColor(21.0)}"></i> 21+ °C <br />
+        `;
+
+        return div;
+    }
+
+    legend.addTo(map);
+}
+
+function generateSunHours() {
+    getColor = function (val) {
+        if      (val < 1500)  return "#ffecdb";
+        else if (val < 1800)  return "#fcdec3";
+        else if (val < 2100)  return "#f8cfac";
+        else if (val < 2400)  return "#f4c196";
+        else if (val < 2700)  return "#eeab75";
+        else if (val < 3000)  return "#e79556";
+        else if (val < 3300)  return "#df7e37";
+        else                  return "#d66615";
+    }
+
+    setStyleSource(sunHours2015);
+
+    generateMap();
+
+    info.update = function(props) {
+        if (props) {
+            this.div.innerHTML = `
+            <h4>Horas de sol anual</h4>
+            <strong>${props.name}</strong> <br />
+            ${sunHours2015[props.id].toLocaleString("en")} h
+            `
+        }
+        else {
+            this.div.innerHTML = `
+            <h4>Horas de sol anual</h4>
+            Coloca el cursor sobre una provincia.
+            `
+        }
+    }
+
+    info.addTo(map);
+
+    legend = L.control({position: "bottomright"});
+
+    legend.onAdd = function (_) {
+        let div = L.DomUtil.create("div", "info legend");
+
+        div.innerHTML += `
+            <b>Temperatura</b><br />
+            <i style = "background: ${getColor(0)   }"></i> < 1500 h <br />
+            <i style = "background: ${getColor(1500)}"></i> < 1750 h <br />
+            <i style = "background: ${getColor(1800)}"></i> < 2000 h <br />
+            <i style = "background: ${getColor(2100)}"></i> < 2250 h <br />
+            <i style = "background: ${getColor(2400)}"></i> < 2500 h <br />
+            <i style = "background: ${getColor(2700)}"></i> < 2750 h <br />
+            <i style = "background: ${getColor(3000)}"></i> < 3000 h <br />
+            <i style = "background: ${getColor(3300)}"></i> 3000+ h <br />
+        `;
+
+        return div;
+    }
+
+    legend.addTo(map);
+}
+
+function generateAverageAge() {
+    getColor = function (val) {
+        if      (val < 40.0)  return "#cfffff";
+        else if (val < 41.5)  return "#bdf2f2";
+        else if (val < 43.0)  return "#aae6e4";
+        else if (val < 44.5)  return "#98d9d7";
+        else if (val < 46.0)  return "#7cc6c3";
+        else if (val < 47.5)  return "#5fb3b0";
+        else if (val < 49.0)  return "#40a19c";
+        else                  return "#138f89";
+    }
+
+    setStyleSource(averageAge2020);
+
+    generateMap();
+
+    info.update = function(props) {
+        if (props) {
+            this.div.innerHTML = `
+            <h4>Edad promedio</h4>
+            <strong>${props.name}</strong> <br />
+            ${averageAge2020[props.id].toLocaleString("en")} años
+            `
+        }
+        else {
+            this.div.innerHTML = `
+            <h4>Edad promedio</h4>
+            Coloca el cursor sobre una provincia.
+            `
+        }
+    }
+
+    info.addTo(map);
+
+    legend = L.control({position: "bottomright"});
+
+    legend.onAdd = function (_) {
+        let div = L.DomUtil.create("div", "info legend");
+
+        div.innerHTML += `
+            <b>Edad promedio</b><br />
+            <i style = "background: ${getColor(0)   }"></i> < 40 años   <br />
+            <i style = "background: ${getColor(40.0)}"></i> < 41.5 años <br />
+            <i style = "background: ${getColor(41.5)}"></i> < 43 años   <br />
+            <i style = "background: ${getColor(43.0)}"></i> < 44.5 años <br />
+            <i style = "background: ${getColor(44.5)}"></i> < 46 años   <br />
+            <i style = "background: ${getColor(46.0)}"></i> < 47.5 años <br />
+            <i style = "background: ${getColor(47.5)}"></i> < 49 años   <br />
+            <i style = "background: ${getColor(49.0)}"></i> 49+ años    <br />
         `;
 
         return div;
