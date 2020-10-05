@@ -32,3 +32,5 @@ https://colorbrewer2.org/#type=sequential&scheme=YlOrRd&n=8
 https://coolinfographics.com/color-pickers
 
 inm: https://www.ine.es/jaxi/Tabla.htm?path=/t20/e245/p08/l0/&file=03005.px&L=0
+
+make a graph (scatter point) where you can plot two stats in a xy coords to find correlations

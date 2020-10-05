@@ -13,7 +13,7 @@
         crossorigin=""></script>
 </head>
 <body>
-    <div id="map-area">
+    <div id="map-area" style="border: 1px solid black;">
     </div>
     <button onclick="map.remove(); generate('population')">Pop</button>
     <button onclick="map.remove(); generate('unemployment')">Unem</button>
@@ -24,9 +24,16 @@
     <button onclick="map.remove(); generate('temperature')">Temp</button>
     <button onclick="map.remove(); generate('sun_hours')">SunH</button>
     <button onclick="map.remove(); generate('average_age')">AvgAge</button>
-    <button onclick="map.remove(); generate('immigrantion')">Immigr</button>
+    <button onclick="map.remove(); generate('immigrantion')">Immigr</button> 
     <button onclick="map.remove(); generate('vehicles')">Vehicles</button>
     <button onclick="map.remove(); generate('companies')">Comp</button>
+    <button onclick="map.remove(); generate('alt_parties')">AltParties</button>
+    <button onclick="map.remove(); generate('cows')">Cows</button>
+    <button onclick="map.remove(); generate('pigs')">Pigs</button>
+    <button onclick="map.remove(); generate('popVar')">PopVar</button>
+    <button onclick="map.remove(); generate('birth_rate')">BirthR</button>
+    <button onclick="map.remove(); generate('tourists')">Tourists</button>
+    <button onclick="map.remove(); generate('dropout')">Dropout</button>
 </body>
 <script type="text/javascript" src="js/spain_provs.js"></script>
 <script type="text/javascript" src="js/datasets/population.js"></script>
@@ -41,6 +48,13 @@
 <script type="text/javascript" src="js/datasets/immigrants2019.js"></script>
 <script type="text/javascript" src="js/datasets/vehicles_pc.js"></script>
 <script type="text/javascript" src="js/datasets/companiesPC.js"></script>
+<script type="text/javascript" src="js/datasets/altParties.js"></script>
+<script type="text/javascript" src="js/datasets/cows2019N.js"></script>
+<script type="text/javascript" src="js/datasets/pigs2019N.js"></script>
+<script type="text/javascript" src="js/datasets/popVar2009_2019.js"></script>
+<script type="text/javascript" src="js/datasets/birth_rate2019.js"></script>
+<script type="text/javascript" src="js/datasets/tourists2017.js"></script>
+<script type="text/javascript" src="js/datasets/dropout_rate2008.js"></script>
 <script type="text/javascript" src="js/map_generation.js"></script>
 <!--<script>window.onload = moveIslands()</script>-->
 <script>window.onload = generate('population')</script>
