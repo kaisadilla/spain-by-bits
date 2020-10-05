@@ -18,13 +18,13 @@ function generate (id) {
                 (id === "temperature")     ? temp2015            :
                 (id === "sun_hours")       ? sunHours2015        :
                 (id === "average_age")     ? averageAge2020      :
-                (id === "immigrantion")    ? immigrationPerc2019 :
+                (id === "immigration")     ? immigrationPerc2019 :
                 (id === "vehicles")        ? vehiclesPC2019      :
                 (id === "companies")       ? companiesPC2019     :
                 (id === "alt_parties")     ? altParties2019N     :
                 (id === "cows")            ? cows2019N           :
                 (id === "pigs")            ? pigs2019N           :
-                (id === "popVar")          ? popVar2009_2019     :
+                (id === "pop_var")          ? popVar2009_2019     :
                 (id === "birth_rate")      ? birthRate2019       :
                 (id === "tourists")        ? tourists2017        :
                 (id === "dropout")         ? dropoutRate2008     :
@@ -36,196 +36,6 @@ function generate (id) {
 
     buildInfo(id);
     buildLegend(id);
-}
-
-/**
- * Creates the getColor() function, used to assign a color to each province depending
- * on the value in the dataset for that province.
- * @param {string} id The id of the dataset.
- */
-function setColorScheme(id) {
-    if (id === "population") {
-        getColor = function (val) {
-            if      (val < 100_000)   return "#ede8ff";
-            else if (val < 200_000)   return "#e1d9fb";
-            else if (val < 400_000)   return "#d5cbf7";
-            else if (val < 800_000)   return "#b9a8ec";
-            else if (val < 1_600_000) return "#9f86df";
-            else if (val < 3_200_000) return "#8563d2";
-            else if (val < 5_000_000) return "#6b3fc3";
-            else                      return "#4f12b3";
-        }
-    }
-    else if (id === "unemployment") {
-        getColor = function (val) {
-            if      (val < 8)    return "#ffe8f1";
-            else if (val < 10)   return "#ebcfd9";
-            else if (val < 12)   return "#d8b5c2";
-            else if (val < 15)   return "#c59dab";
-            else if (val < 17)   return "#a87989";
-            else if (val < 19)   return "#8c5668";
-            else if (val < 22)   return "#703449";
-            else                 return "#54112b";
-        }
-    }
-    else if (id === "life_expectancy") {
-        getColor = function (val) {
-            if      (val < 81.0) return "#e9ffd4";
-            else if (val < 82.0) return "#d3ebbc";
-            else if (val < 82.5) return "#bdd7a5";
-            else if (val < 83.0) return "#a7c38e";
-            else if (val < 83.5) return "#87a66d";
-            else if (val < 84.0) return "#678a4d";
-            else if (val < 84.5) return "#496e2e";
-            else                 return "#2a540d";
-        }
-    }
-    else if (id === "average_salary") {
-        getColor = function (val) {
-            if      (val < 13_000)  return "#e6ffe8";
-            else if (val < 15_000)  return "#ceeecf";
-            else if (val < 17_000)  return "#b6deb7";
-            else if (val < 18_000)  return "#9fcd9e";
-            else if (val < 19_000)  return "#7db47a";
-            else if (val < 21_000)  return "#5b9b56";
-            else if (val < 23_000)  return "#398332";
-            else                    return "#086b06";
-        }
-    }
-    else if (id === "rain") {
-        getColor = function (val) {
-            if      (val < 250)  return "#e8efef";
-            else if (val < 300)  return "#cedee0";
-            else if (val < 400)  return "#a9bec2";
-            else if (val < 500)  return "#869fa5";
-            else if (val < 700)  return "#64808a";
-            else if (val < 900)  return "#446370";
-            else if (val < 1100) return "#244758";
-            else                 return "#002c40";
-        }
-    }
-    else if (id === "temperature") {
-        getColor = function (val) {
-            if      (val < 12.0)  return "#fff8ad";
-            else if (val < 13.5)  return "#fae791";
-            else if (val < 15.0)  return "#f7d476";
-            else if (val < 16.5)  return "#f4b24b";
-            else if (val < 18.0)  return "#f29830";
-            else if (val < 19.5)  return "#f07b18";
-            else if (val < 21.0)  return "#ee5a07";
-            else                  return "#eb2907";
-        }
-    }
-}
-
-/**
- * Creates the info panel for the dataset selected.
- * @param {string} id The id of the dataset.
- */
-function buildInfo(id) {
-    if (id === "population") {
-        setInfoUpdate(population, "Número de habitantes", v => `${v.toLocaleString("en")} hab.`);
-    }
-    else if (id === "unemployment") {
-        setInfoUpdate(paro2020T2, "% desempleados", v => `${v.toFixed(2)} %`);
-    }
-    else if (id === "life_expectancy") {
-        setInfoUpdate(lifeExpectancy2019, "Esperanza de vida", v => `${v.toFixed(2)} años`);
-    }
-    else if (id === "average_salary") {
-        setInfoUpdate(avgSalary2017, "Salario medio", v => `€ ${v.toLocaleString("en")}`);
-    }
-    else if (id === "rain") {
-        setInfoUpdate(rain2015, "Precipitación anual", v => `${v.toLocaleString("en")} mm`);
-    }
-    else if (id === "temperature") {
-        setInfoUpdate(temp2015, "Temperatura media anual", v => `${v.toLocaleString("en")} °C`);
-    }
-
-    info.addTo(map);
-}
-
-function buildLegend(id) {
-    if (id === "population") {
-        setLegend(
-            "Habitantes",
-            [        0, "< 100 k"],
-            [  100_000, "< 200 k"],
-            [  200_000, "< 400 k"],
-            [  400_000, "< 800 k"],
-            [  800_000, "< 1.6 m"],
-            [1_600_000, "< 3.2 m"],
-            [3_200_000, "< 5 m"  ],
-            [5_000_000, "5+ m"   ],
-        )
-    }
-    else if (id === "unemployment") {
-        setLegend(
-            "% desempleados",
-            [ 0, "< 8 %" ],
-            [ 8, "< 10 %"],
-            [10, "< 12 %"],
-            [12, "< 15 %"],
-            [15, "< 17 %"],
-            [17, "< 19 %"],
-            [19, "< 22 %"],
-            [22, "22+ %" ],
-        )
-    }
-    else if (id === "life_expectancy") {
-        setLegend(
-            "Esperanza de vida",
-            [   0, "< 81"   ],
-            [81.0, "< 82"   ],
-            [82.0, "< 82.5" ],
-            [82.5, "< 83"   ],
-            [83.0, "< 83.5" ],
-            [83.5, "< 84"   ],
-            [84.0, "< 84.5" ],
-            [84.5, "84.5+ %"],
-        )
-    }
-    else if (id === "average_salary") {
-        setLegend(
-            "Salario medio",
-            [     0, "< € 13 k"],
-            [13_000, "< € 15 k"],
-            [15_000, "< € 17 k"],
-            [17_000, "< € 18 k"],
-            [18_000, "< € 19 k"],
-            [19_000, "< € 21 k"],
-            [21_000, "< € 23 k"],
-            [23_000, "€ 23+ k" ],
-        )
-    }
-    else if (id === "rain") {
-        setLegend(
-            "Precipitación anual",
-            [   0, "< 250 mm"  ],
-            [ 250, "< 300 mm"  ],
-            [ 300, "< 400 mm"  ],
-            [ 400, "< 500 mm"  ],
-            [ 500, "< 700 mm"  ],
-            [ 700, "< 900 mm"  ],
-            [ 900, "< 1,100 mm"],
-            [1100, "1,100+ mm"  ],
-        )
-    }
-    else if (id === "temperature") {
-        setLegend(
-            "Temnperatura media anual",
-            [   0, "< 12 °C"  ],
-            [12.0, "< 13.5 °C"],
-            [13.5, "< 15 °C"  ],
-            [15.0, "< 16.5 °C"],
-            [16.5, "< 18 °C"  ],
-            [18.0, "< 19.5 °C"],
-            [19.5, "< 21 °C"  ],
-            [21.0, "21+ °C"   ],
-        )
-    }
-
-    legend.addTo(map);
 }
 
 function drawMap() {
@@ -363,4 +173,534 @@ function onEachFeature(_, layer) {
         mouseover: highlightFeature,
         mouseout: resetHighlight,
     });
+}
+
+
+
+/**
+ * Creates the getColor() function, used to assign a color to each province depending
+ * on the value in the dataset for that province.
+ * @param {string} id The id of the dataset.
+ */
+function setColorScheme(id) {
+    if (id === "population") {
+        getColor = function (val) {
+            if      (val < 100_000)   return "#ede8ff";
+            else if (val < 200_000)   return "#e1d9fb";
+            else if (val < 400_000)   return "#d5cbf7";
+            else if (val < 800_000)   return "#b9a8ec";
+            else if (val < 1_600_000) return "#9f86df";
+            else if (val < 3_200_000) return "#8563d2";
+            else if (val < 5_000_000) return "#6b3fc3";
+            else                      return "#4f12b3";
+        }
+    }
+    else if (id === "unemployment") {
+        getColor = function (val) {
+            if      (val < 8)    return "#ffe8f1";
+            else if (val < 10)   return "#ebcfd9";
+            else if (val < 12)   return "#d8b5c2";
+            else if (val < 15)   return "#c59dab";
+            else if (val < 17)   return "#a87989";
+            else if (val < 19)   return "#8c5668";
+            else if (val < 22)   return "#703449";
+            else                 return "#54112b";
+        }
+    }
+    else if (id === "life_expectancy") {
+        getColor = function (val) {
+            if      (val < 81.0) return "#e9ffd4";
+            else if (val < 82.0) return "#d3ebbc";
+            else if (val < 82.5) return "#bdd7a5";
+            else if (val < 83.0) return "#a7c38e";
+            else if (val < 83.5) return "#87a66d";
+            else if (val < 84.0) return "#678a4d";
+            else if (val < 84.5) return "#496e2e";
+            else                 return "#2a540d";
+        }
+    }
+    else if (id === "average_salary") {
+        getColor = function (val) {
+            if      (val < 13_000)  return "#e6ffe8";
+            else if (val < 15_000)  return "#ceeecf";
+            else if (val < 17_000)  return "#b6deb7";
+            else if (val < 18_000)  return "#9fcd9e";
+            else if (val < 19_000)  return "#7db47a";
+            else if (val < 21_000)  return "#5b9b56";
+            else if (val < 23_000)  return "#398332";
+            else                    return "#086b06";
+        }
+    }
+    else if (id === "rain") {
+        getColor = function (val) {
+            if      (val < 250)  return "#e8efef";
+            else if (val < 300)  return "#cedee0";
+            else if (val < 400)  return "#a9bec2";
+            else if (val < 500)  return "#869fa5";
+            else if (val < 700)  return "#64808a";
+            else if (val < 900)  return "#446370";
+            else if (val < 1100) return "#244758";
+            else                 return "#002c40";
+        }
+    }
+    else if (id === "temperature") {
+        getColor = function (val) {
+            if      (val < 12.0)  return "#fff8ad";
+            else if (val < 13.5)  return "#fae791";
+            else if (val < 15.0)  return "#f7d476";
+            else if (val < 16.5)  return "#f4b24b";
+            else if (val < 18.0)  return "#f29830";
+            else if (val < 19.5)  return "#f07b18";
+            else if (val < 21.0)  return "#ee5a07";
+            else                  return "#eb2907";
+        }
+    }
+    else if (id === "sun_hours") {
+        getColor = function (val) {
+            if      (val < 1500)  return "#ffecdb";
+            else if (val < 1800)  return "#fcdec3";
+            else if (val < 2100)  return "#f8cfac";
+            else if (val < 2400)  return "#f4c196";
+            else if (val < 2700)  return "#eeab75";
+            else if (val < 3000)  return "#e79556";
+            else if (val < 3300)  return "#df7e37";
+            else                  return "#d66615";
+        }
+    }
+    else if (id === "average_age") {
+        getColor = function (val) {
+            if      (val < 40.0)  return "#cfffff";
+            else if (val < 41.5)  return "#bdf2f2";
+            else if (val < 43.0)  return "#aae6e4";
+            else if (val < 44.5)  return "#98d9d7";
+            else if (val < 46.0)  return "#7cc6c3";
+            else if (val < 47.5)  return "#5fb3b0";
+            else if (val < 49.0)  return "#40a19c";
+            else                  return "#138f89";
+        }
+    }
+    else if (id === "immigration") {
+        getColor = function (val) {
+            if      (val < 0.03)  return "#fff3de";
+            else if (val < 0.06)  return "#ffeac6";
+            else if (val < 0.09)  return "#ffe0af";
+            else if (val < 0.12)  return "#ffd698";
+            else if (val < 0.14)  return "#ffcb7a";
+            else if (val < 0.17)  return "#ffbf5c";
+            else if (val < 0.20)  return "#ffb23a";
+            else                  return "#ffa600";
+        }
+    }
+    else if (id === "vehicles") {
+        getColor = function (val) {
+            if      (val < 0.6150)  return "#e3ffe9";
+            else if (val < 0.6625)  return "#d2fddb";
+            else if (val < 0.7100)  return "#c1facd";
+            else if (val < 0.7575)  return "#b0f7bf";
+            else if (val < 0.8050)  return "#95f3aa";
+            else if (val < 0.8525)  return "#78ee94";
+            else if (val < 0.90)    return "#55e97e";
+            else                    return "#19e366";
+        }
+    }
+    else if (id === "companies") {
+        getColor = function (val) {
+            if      (val < 0.050)  return "#dbf7ff";
+            else if (val < 0.055)  return "#b4e2f2";
+            else if (val < 0.060)  return "#88cae8";
+            else if (val < 0.065)  return "#5db1e0";
+            else if (val < 0.070)  return "#008bd2";
+            else if (val < 0.075)  return "#0064c1";
+            else if (val < 0.080)  return "#003ba8";
+            else                   return "#0b0085";
+        }
+    }
+    else if (id === "alt_parties") {
+        getColor = function (val) {
+            if      (val < 0.300)  return "#efd4ff";
+            else if (val < 0.375)  return "#e2c0f5";
+            else if (val < 0.450)  return "#d5abeb";
+            else if (val < 0.525)  return "#c997e0";
+            else if (val < 0.600)  return "#b679d0";
+            else if (val < 0.675)  return "#a459bf";
+            else if (val < 0.750)  return "#9138ae";
+            else                   return "#70008a";
+        }
+    }
+    else if (id === "cows") {
+        getColor = function (val) {
+            if      (val < 10_000)  return "#f4ffb3";
+            else if (val < 20_000)  return "#e8f092";
+            else if (val < 50_000)  return "#d9e184";
+            else if (val < 100_000) return "#cbd276";
+            else if (val < 200_000) return "#b6bc62";
+            else if (val < 300_000) return "#a1a64d";
+            else if (val < 500_000) return "#8d9139";
+            else                    return "#65691f";
+        }
+    }
+    else if (id === "pigs") {
+        getColor = function (val) {
+            if      (val < 20_000)    return "#ffebf5";
+            else if (val < 50_000)    return "#fbd7ea";
+            else if (val < 100_000)   return "#f6c2df";
+            else if (val < 200_000)   return "#f0aed4";
+            else if (val < 500_000)   return "#e790c4";
+            else if (val < 1_000_000) return "#dc70b5";
+            else if (val < 4_000_000) return "#c74ba0";
+            else                      return "#ab1a87";
+        }
+    }
+    else if (id === "pop_var") {
+        getColor = function (val) {
+            if      (val < -0.10)  return "#de425b";
+            else if (val < -0.07)  return "#e9747e";
+            else if (val < -0.04)  return "#f09fa2";
+            else if (val < -0.01)  return "#f3c8c9";
+            else if (val <  0.01)  return "#f1f1f1";
+            else if (val <  0.04)  return "#c2d5db";
+            else if (val <  0.07)  return "#93bbc6";
+            else if (val <  0.10)  return "#60a1b1";
+            else                   return "#16879c";
+        }
+    }
+    else if (id === "birth_rate") {
+        getColor = function (val) {
+            if      (val < 5)      return "#deffe6";
+            else if (val < 6)      return "#c8efd2";
+            else if (val < 7)      return "#b2debe";
+            else if (val < 8)      return "#9dceaa";
+            else if (val < 9)      return "#7eb68d";
+            else if (val < 10)     return "#5e9e72";
+            else if (val < 12)     return "#3d8757";
+            else                   return "#14703d";
+        }
+    }
+    else if (id === "tourists") {
+        getColor = function (val) {
+            if      (val < 100_000)   return "#ffedc4";
+            else if (val < 200_000)   return "#f5dfb1";
+            else if (val < 400_000)   return "#ebd29e";
+            else if (val < 800_000)   return "#ddbd83";
+            else if (val < 1_600_000) return "#cda664";
+            else if (val < 3_200_000) return "#bd8e46";
+            else if (val < 6_200_000) return "#996b25";
+            else                      return "#704500";
+        }    
+    }
+    else if (id === "dropout") {
+        getColor = function (val) {
+            if      (val < 0.16)   return "#ffe9d9";
+            else if (val < 0.20)   return "#f0dac7";
+            else if (val < 0.24)   return "#e3c7b4";
+            else if (val < 0.28)   return "#c8a590";
+            else if (val < 0.32)   return "#ad826c";
+            else if (val < 0.36)   return "#92614b";
+            else if (val < 0.40)   return "#77412c";
+            else                   return "#5c2111";
+        }    
+    }
+}
+
+/**
+ * Creates the info panel for the dataset selected.
+ * @param {string} id The id of the dataset.
+ */
+function buildInfo(id) {
+    if (id === "population") {
+        setInfoUpdate(population, "Número de habitantes", v => `${v.toLocaleString("en")} hab.`);
+    }
+    else if (id === "unemployment") {
+        setInfoUpdate(paro2020T2, "% desempleados", v => `${v.toFixed(2)} %`);
+    }
+    else if (id === "life_expectancy") {
+        setInfoUpdate(lifeExpectancy2019, "Esperanza de vida", v => `${v.toFixed(2)} años`);
+    }
+    else if (id === "average_salary") {
+        setInfoUpdate(avgSalary2017, "Salario medio", v => `€ ${v.toLocaleString("en")}`);
+    }
+    else if (id === "rain") {
+        setInfoUpdate(rain2015, "Precipitación anual", v => `${v.toLocaleString("en")} mm`);
+    }
+    else if (id === "temperature") {
+        setInfoUpdate(temp2015, "Temperatura media anual", v => `${v.toLocaleString("en")} °C`);
+    }
+    else if (id === "sun_hours") {
+        setInfoUpdate(sunHours2015, "Horas de sol anuales", v => `${v.toLocaleString("en")} h`);
+    }
+    else if (id === "average_age") {
+        setInfoUpdate(averageAge2020, "Edad promedio", v => `${v.toLocaleString("en")} años`);
+    }
+    else if (id === "immigration") {
+        setInfoUpdate(immigrationPerc2019, "% de inmigrantes", v => `${(v * 100).toFixed(1)} %`);
+    }
+    else if (id === "vehicles") {
+        setInfoUpdate(vehiclesPC2019, "Vehículos / 100 hab", v => `${(v * 100).toFixed(1)} vehículos / 100 hab.`);
+    }
+    else if (id === "companies") {
+        setInfoUpdate(companiesPC2019, "Empresas / 100 hab.", v => `${(v * 100).toFixed(1)} empresas / 100 hab.`);
+    }
+    else if (id === "alt_parties") {
+        setInfoUpdate(altParties2019N, "% votos a partidos alternativos", v => `${(v * 100).toFixed(2)} %`);
+    }
+    else if (id === "cows") {
+        setInfoUpdate(cows2019N, "Ganado bovino", v => `${v.toLocaleString("en")} vacas`);
+    }
+    else if (id === "pigs") {
+        setInfoUpdate(pigs2019N, "Ganado porcino", v => `${v.toLocaleString("en")} cerdos`);
+    }
+    else if (id === "pop_var") {
+        setInfoUpdate(popVar2009_2019, "Variación en la población", v => `${(v * 100).toFixed(2)} %`);
+    }
+    else if (id === "birth_rate") {
+        setInfoUpdate(birthRate2019, "Nacimientos por mil", v => `${v.toFixed(2)} ‰`);
+    }
+    else if (id === "tourists") {
+        setInfoUpdate(tourists2017, "Turistas anuales", v => `${v.toFixed(2)} turistas.`);
+    }
+    else if (id === "dropout") {
+        setInfoUpdate(dropoutRate2008, "Abandono escolar (2008)", v => `${(v * 100).toFixed(1)} %`);
+    }
+
+    info.addTo(map);
+}
+
+function buildLegend(id) {
+    if (id === "population") {
+        setLegend(
+            "Habitantes",
+            [        0, "< 100 k"],
+            [  100_000, "< 200 k"],
+            [  200_000, "< 400 k"],
+            [  400_000, "< 800 k"],
+            [  800_000, "< 1.6 m"],
+            [1_600_000, "< 3.2 m"],
+            [3_200_000, "< 5 m"  ],
+            [5_000_000, "5+ m"   ],
+        )
+    }
+    else if (id === "unemployment") {
+        setLegend(
+            "% desempleados",
+            [ 0, "< 8 %" ],
+            [ 8, "< 10 %"],
+            [10, "< 12 %"],
+            [12, "< 15 %"],
+            [15, "< 17 %"],
+            [17, "< 19 %"],
+            [19, "< 22 %"],
+            [22, "22+ %" ],
+        )
+    }
+    else if (id === "life_expectancy") {
+        setLegend(
+            "Esperanza de vida",
+            [   0, "< 81"   ],
+            [81.0, "< 82"   ],
+            [82.0, "< 82.5" ],
+            [82.5, "< 83"   ],
+            [83.0, "< 83.5" ],
+            [83.5, "< 84"   ],
+            [84.0, "< 84.5" ],
+            [84.5, "84.5+ %"],
+        )
+    }
+    else if (id === "average_salary") {
+        setLegend(
+            "Salario medio",
+            [     0, "< € 13 k"],
+            [13_000, "< € 15 k"],
+            [15_000, "< € 17 k"],
+            [17_000, "< € 18 k"],
+            [18_000, "< € 19 k"],
+            [19_000, "< € 21 k"],
+            [21_000, "< € 23 k"],
+            [23_000, "€ 23+ k" ],
+        )
+    }
+    else if (id === "rain") {
+        setLegend(
+            "Precipitación anual",
+            [   0, "< 250 mm"  ],
+            [ 250, "< 300 mm"  ],
+            [ 300, "< 400 mm"  ],
+            [ 400, "< 500 mm"  ],
+            [ 500, "< 700 mm"  ],
+            [ 700, "< 900 mm"  ],
+            [ 900, "< 1,100 mm"],
+            [1100, "1,100+ mm"  ],
+        )
+    }
+    else if (id === "temperature") {
+        setLegend(
+            "Temnperatura media anual",
+            [   0, "< 12 °C"  ],
+            [12.0, "< 13.5 °C"],
+            [13.5, "< 15 °C"  ],
+            [15.0, "< 16.5 °C"],
+            [16.5, "< 18 °C"  ],
+            [18.0, "< 19.5 °C"],
+            [19.5, "< 21 °C"  ],
+            [21.0, "21+ °C"   ],
+        )
+    }
+    else if (id === "sun_hours") {
+        setLegend(
+            "Temnperatura media anual",
+            [   0, "< 1500 h" ],
+            [1500, "< 1800 h" ],
+            [1800, "< 2100 h" ],
+            [2100, "< 2400 h" ],
+            [2400, "< 2700 h" ],
+            [2700, "< 3000 h" ],
+            [3000, "< 3300 h" ],
+            [3300, "3300+ h"  ],
+        )
+    }
+    else if (id === "average_age") {
+        setLegend(
+            "Edad promedio",
+            [   0, "< 40 años"   ],
+            [40.0, "< 41.5 años" ],
+            [41.5, "< 43 años"   ],
+            [43.0, "< 44.5 años" ],
+            [44.5, "< 46 años"   ],
+            [46.0, "< 47.5 años" ],
+            [47.5, "< 49 años"   ],
+            [49.0, "49+ años"    ],
+        )
+    }
+    else if (id === "immigration") {
+        setLegend(
+            "% de inmigrantes",
+            [   0, "< 3 %"  ],
+            [0.03, "< 6 %"  ],
+            [0.06, "< 9 %"  ],
+            [0.09, "< 12 %" ],
+            [0.12, "< 14 %" ],
+            [0.14, "< 17 %" ],
+            [0.17, "< 20 %" ],
+            [0.20, "20+ %"  ],
+        )
+    }
+    else if (id === "vehicles") {
+        setLegend(
+            "Vehículos / 100 hab.",
+            [     0, "< 61.5 %" ],
+            [0.6150, "< 66.25 %"],
+            [0.6625, "< 71 %"   ],
+            [0.7100, "< 75.75 %"],
+            [0.7575, "< 80.5 %" ],
+            [0.8050, "< 85.25 %"],
+            [0.8525, "< 90 %"   ],
+            [0.9000, "90+ %"    ],
+        )
+    }
+    else if (id === "companies") {
+        setLegend(
+            "Empresas / 100 hab.",
+            [    0, "< 5 emp."  ],
+            [0.050, "< 5.5 emp."],
+            [0.055, "< 6 emp."  ],
+            [0.060, "< 6.5 emp."],
+            [0.065, "< 7 emp."  ],
+            [0.070, "< 7.5 emp."],
+            [0.075, "< 8 emp."  ],
+            [0.080, "8+ %"      ],
+        )
+    }
+    else if (id === "alt_parties") {
+        setLegend(
+            "% votos a partidos alternativos",
+            [    0, "< 3 0%"  ],
+            [0.300, "< 37.5 %"],
+            [0.375, "< 45 %"  ],
+            [0.450, "< 52.5 %"],
+            [0.525, "< 60 %"  ],
+            [0.600, "< 67.5 %"],
+            [0.675, "< 75 %"  ],
+            [0.750, "75+ %"   ],
+        )
+    }
+    else if (id === "cows") {
+        setLegend(
+            "Ganado bovino",
+            [      0, "< 10 k"  ],
+            [ 10_000, "< 20 k"  ],
+            [ 20_000, "< 50 k"  ],
+            [ 50_000, "< 100 k" ],
+            [100_000, "< 200 k" ],
+            [200_000, "< 300 k" ],
+            [300_000, "< 500 k" ],
+            [500_000, "500+ k"  ],
+        )
+    }
+    else if (id === "pigs") {
+        setLegend(
+            "Ganado bovino",
+            [        0, "< 20 k"  ],
+            [   20_000, "< 50 k"  ],
+            [   50_000, "< 100 k" ],
+            [  100_000, "< 200 k" ],
+            [  200_000, "< 500 k" ],
+            [  500_000, "< 1 m"   ],
+            [1_000_000, "< 4 m"   ],
+            [4_000_000, "4+ m"    ],
+        )
+    }
+    else if (id === "pop_var") {
+        setLegend(
+            "Variación en la población",
+            [-0.20, "< -10 %"],
+            [-0.10, "< -7 %" ],
+            [-0.07, "< -4 %" ],
+            [-0.04, "< -1 %" ],
+            [-0.01, "< 1 %"  ],
+            [ 0.01, "< 4 %"  ],
+            [ 0.04, "< 7 %"  ],
+            [ 0.07, "< 10 %" ],
+            [ 0.10, "10+ %"  ],
+        )
+    }
+    else if (id === "birth_rate") {
+        setLegend(
+            "Nacimientos por mil",
+            [0 , "< 5 ‰"  ],
+            [5 , "< 6 ‰"  ],
+            [6 , "< 7 ‰"  ],
+            [7 , "< 8 ‰"  ],
+            [8 , "< 9 ‰"  ],
+            [9 , "< 10 ‰" ],
+            [10, "< 12 ‰" ],
+            [12, "12+ ‰"  ],
+        )
+    }
+    else if (id === "tourists") {
+        setLegend(
+            "Turistas anuales",
+            [0        , "< 100 k"],
+            [100_000  , "< 200 k"],
+            [200_000  , "< 400 k"],
+            [400_000  , "< 800 k"],
+            [800_000  , "< 1.6 m"],
+            [1_600_000, "< 3.2 m"],
+            [3_200_000, "< 6.4 m"],
+            [6_200_000, "6.4+ m" ],
+        )
+    }
+    else if (id === "dropout") {
+        setLegend(
+            "Abandono escolar",
+            [0.00, "< 16 %"],
+            [0.16, "< 20 %"],
+            [0.20, "< 24 %"],
+            [0.24, "< 28 %"],
+            [0.28, "< 32 %"],
+            [0.32, "< 36 %"],
+            [0.36, "< 40 %"],
+            [0.40, "40+ %" ],
+        )
+    }
+
+    legend.addTo(map);
 }
