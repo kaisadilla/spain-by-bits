@@ -68,6 +68,54 @@ function setColorScheme(id) {
             else                 return "#54112b";
         }
     }
+    else if (id === "life_expectancy") {
+        getColor = function (val) {
+            if      (val < 81.0) return "#e9ffd4";
+            else if (val < 82.0) return "#d3ebbc";
+            else if (val < 82.5) return "#bdd7a5";
+            else if (val < 83.0) return "#a7c38e";
+            else if (val < 83.5) return "#87a66d";
+            else if (val < 84.0) return "#678a4d";
+            else if (val < 84.5) return "#496e2e";
+            else                 return "#2a540d";
+        }
+    }
+    else if (id === "average_salary") {
+        getColor = function (val) {
+            if      (val < 13_000)  return "#e6ffe8";
+            else if (val < 15_000)  return "#ceeecf";
+            else if (val < 17_000)  return "#b6deb7";
+            else if (val < 18_000)  return "#9fcd9e";
+            else if (val < 19_000)  return "#7db47a";
+            else if (val < 21_000)  return "#5b9b56";
+            else if (val < 23_000)  return "#398332";
+            else                    return "#086b06";
+        }
+    }
+    else if (id === "rain") {
+        getColor = function (val) {
+            if      (val < 250)  return "#e8efef";
+            else if (val < 300)  return "#cedee0";
+            else if (val < 400)  return "#a9bec2";
+            else if (val < 500)  return "#869fa5";
+            else if (val < 700)  return "#64808a";
+            else if (val < 900)  return "#446370";
+            else if (val < 1100) return "#244758";
+            else                 return "#002c40";
+        }
+    }
+    else if (id === "temperature") {
+        getColor = function (val) {
+            if      (val < 12.0)  return "#fff8ad";
+            else if (val < 13.5)  return "#fae791";
+            else if (val < 15.0)  return "#f7d476";
+            else if (val < 16.5)  return "#f4b24b";
+            else if (val < 18.0)  return "#f29830";
+            else if (val < 19.5)  return "#f07b18";
+            else if (val < 21.0)  return "#ee5a07";
+            else                  return "#eb2907";
+        }
+    }
 }
 
 /**
@@ -81,7 +129,18 @@ function buildInfo(id) {
     else if (id === "unemployment") {
         setInfoUpdate(paro2020T2, "% desempleados", v => `${v.toFixed(2)} %`);
     }
-
+    else if (id === "life_expectancy") {
+        setInfoUpdate(lifeExpectancy2019, "Esperanza de vida", v => `${v.toFixed(2)} años`);
+    }
+    else if (id === "average_salary") {
+        setInfoUpdate(avgSalary2017, "Salario medio", v => `€ ${v.toLocaleString("en")}`);
+    }
+    else if (id === "rain") {
+        setInfoUpdate(rain2015, "Precipitación anual", v => `${v.toLocaleString("en")} mm`);
+    }
+    else if (id === "temperature") {
+        setInfoUpdate(temp2015, "Temperatura media anual", v => `${v.toLocaleString("en")} °C`);
+    }
 
     info.addTo(map);
 }
@@ -111,6 +170,58 @@ function buildLegend(id) {
             [17, "< 19 %"],
             [19, "< 22 %"],
             [22, "22+ %" ],
+        )
+    }
+    else if (id === "life_expectancy") {
+        setLegend(
+            "Esperanza de vida",
+            [   0, "< 81"   ],
+            [81.0, "< 82"   ],
+            [82.0, "< 82.5" ],
+            [82.5, "< 83"   ],
+            [83.0, "< 83.5" ],
+            [83.5, "< 84"   ],
+            [84.0, "< 84.5" ],
+            [84.5, "84.5+ %"],
+        )
+    }
+    else if (id === "average_salary") {
+        setLegend(
+            "Salario medio",
+            [     0, "< € 13 k"],
+            [13_000, "< € 15 k"],
+            [15_000, "< € 17 k"],
+            [17_000, "< € 18 k"],
+            [18_000, "< € 19 k"],
+            [19_000, "< € 21 k"],
+            [21_000, "< € 23 k"],
+            [23_000, "€ 23+ k" ],
+        )
+    }
+    else if (id === "rain") {
+        setLegend(
+            "Precipitación anual",
+            [   0, "< 250 mm"  ],
+            [ 250, "< 300 mm"  ],
+            [ 300, "< 400 mm"  ],
+            [ 400, "< 500 mm"  ],
+            [ 500, "< 700 mm"  ],
+            [ 700, "< 900 mm"  ],
+            [ 900, "< 1,100 mm"],
+            [1100, "1,100+ mm"  ],
+        )
+    }
+    else if (id === "temperature") {
+        setLegend(
+            "Temnperatura media anual",
+            [   0, "< 12 °C"  ],
+            [12.0, "< 13.5 °C"],
+            [13.5, "< 15 °C"  ],
+            [15.0, "< 16.5 °C"],
+            [16.5, "< 18 °C"  ],
+            [18.0, "< 19.5 °C"],
+            [19.5, "< 21 °C"  ],
+            [21.0, "21+ °C"   ],
         )
     }
 
@@ -190,7 +301,6 @@ function setInfoUpdate(dataset, dataName, format) {
  * @param  {...[number, string]} pairs The value used to calculate the color of this sample, and the label of such sample.
  */
 function setLegend(dataName, ...pairs) {
-    console.log("a");
     legend.onAdd = function (_) {
         let div = L.DomUtil.create("div", "info legend");
 
