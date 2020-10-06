@@ -1,7 +1,18 @@
-function createChart () {
-    let dataset1 = dropoutRate2008;
-    let dataset2 = temp2015;
+let chart;
 
+function parseAndCreate() {
+    console.log("Changed selection.");
+    let menu1 = document.getElementById("chart1");
+    let selected1 = menu1.value;
+    let menu2 = document.getElementById("chart2");
+    let selected2 = menu2.value;
+    chart.destroy();
+    createChart(selected1, selected2);
+}
+
+function createChart (id1, id2) {
+    let dataset1 = datasets[id1].dataset;
+    let dataset2 = datasets[id2].dataset;
     let redLabel = [];
     let redData = [];
 
@@ -10,10 +21,8 @@ function createChart () {
         redData.push({x: dataset1[key], y: dataset2[key]});
     }
 
-    console.log(redData);
-
     let ctx = document.getElementById("chart-area").getContext("2d");
-    let myChart = new Chart(ctx, {
+    chart = new Chart(ctx, {
         type: "scatter",
         data: {
             datasets: [{

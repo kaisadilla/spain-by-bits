@@ -8,30 +8,8 @@ let legend;
 let getColor;
 let style;
 
-function getDataSet (id) {
-    return (id === "population")      ? population          :
-           (id === "unemployment")    ? paro2020T2          :
-           (id === "life_expectancy") ? lifeExpectancy2019  :
-           (id === "average_salary")  ? avgSalary2017       :
-           (id === "rain")            ? rain2015            :
-           (id === "temperature")     ? temp2015            :
-           (id === "sun_hours")       ? sunHours2015        :
-           (id === "average_age")     ? averageAge2020      :
-           (id === "immigration")     ? immigrationPerc2019 :
-           (id === "vehicles")        ? vehiclesPC2019      :
-           (id === "companies")       ? companiesPC2019     :
-           (id === "alt_parties")     ? altParties2019N     :
-           (id === "cows")            ? cows2019N           :
-           (id === "pigs")            ? pigs2019N           :
-           (id === "pop_var")         ? popVar2009_2019     :
-           (id === "birth_rate")      ? birthRate2019       :
-           (id === "tourists")        ? tourists2017        :
-           (id === "dropout")         ? dropoutRate2008     :
-           undefined;
-}
-
 function generateMap (id) {
-    let dataset = getDataSet(id);
+    let dataset = datasets[id].dataset;
     setStyleSource(dataset);
     setColorScheme(id);
 
@@ -459,7 +437,7 @@ function buildInfo(id) {
         setInfoUpdate(birthRate2019, "Nacimientos por mil", v => `${v.toFixed(2)} ‰`);
     }
     else if (id === "tourists") {
-        setInfoUpdate(tourists2017, "Turistas anuales", v => `${v.toFixed(2)} turistas.`);
+        setInfoUpdate(tourists2017, "Turistas anuales", v => `${v.toLocaleString("en")} turistas.`);
     }
     else if (id === "dropout") {
         setInfoUpdate(dropoutRate2008, "Abandono escolar (2008)", v => `${(v * 100).toFixed(1)} %`);

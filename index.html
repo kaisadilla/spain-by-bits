@@ -39,6 +39,8 @@
     <button onclick="map.remove(); generateMap('birth_rate')">BirthR</button>
     <button onclick="map.remove(); generateMap('tourists')">Tourists</button>
     <button onclick="map.remove(); generateMap('dropout')">Dropout</button>
+    <select id="chart1" onchange="parseAndCreate()"></select>
+    <select id="chart2" onchange="parseAndCreate()"></select>
     <canvas id="chart-area"></canvas>
 </body>
 <script type="text/javascript" src="js/spain_provs.js"></script>
@@ -61,9 +63,11 @@
 <script type="text/javascript" src="js/datasets/birth_rate2019.js"></script>
 <script type="text/javascript" src="js/datasets/tourists2017.js"></script>
 <script type="text/javascript" src="js/datasets/dropout_rate2008.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/map_generation.js"></script>
 <script type="text/javascript" src="js/chart_generation.js"></script>
 <!--<script>window.onload = moveIslands()</script>-->
+<script>window.onload = fillMenus()</script>
 <script>window.onload = generateMap('population')</script>
-<script>window.onload = createChart()</script>
+<script>window.onload = createChart("sun_hours", "dropout")</script>
 </html>
