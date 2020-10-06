@@ -4,36 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spain in Bits</title>
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin=""/>
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/Chart.min.css">
+
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
+    <script type="text/javascript" src="js/Chart.bundle.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-    <div id="map-area" style="border: 1px solid black;">
+    <div id="map-area">
     </div>
-    <button onclick="map.remove(); generate('population')">Pop</button>
-    <button onclick="map.remove(); generate('unemployment')">Unem</button>
-    <button onclick="map.remove(); generate('diff_ocupacion')" style="display: none">Diff</button>
-    <button onclick="map.remove(); generate('life_expectancy')">LifeExp</button>
-    <button onclick="map.remove(); generate('average_salary')">AvgSalary</button>
-    <button onclick="map.remove(); generate('rain')">Rain</button>
-    <button onclick="map.remove(); generate('temperature')">Temp</button>
-    <button onclick="map.remove(); generate('sun_hours')">SunH</button>
-    <button onclick="map.remove(); generate('average_age')">AvgAge</button>
-    <button onclick="map.remove(); generate('immigration')">Immigr</button> 
-    <button onclick="map.remove(); generate('vehicles')">Vehicles</button>
-    <button onclick="map.remove(); generate('companies')">Comp</button>
-    <button onclick="map.remove(); generate('alt_parties')">AltParties</button>
-    <button onclick="map.remove(); generate('cows')">Cows</button>
-    <button onclick="map.remove(); generate('pigs')">Pigs</button>
-    <button onclick="map.remove(); generate('pop_var')">PopVar</button>
-    <button onclick="map.remove(); generate('birth_rate')">BirthR</button>
-    <button onclick="map.remove(); generate('tourists')">Tourists</button>
-    <button onclick="map.remove(); generate('dropout')">Dropout</button>
+    <button onclick="map.remove(); generateMap('population')">Pop</button>
+    <button onclick="map.remove(); generateMap('unemployment')">Unem</button>
+    <button onclick="map.remove(); generateMap('diff_ocupacion')" style="display: none">Diff</button>
+    <button onclick="map.remove(); generateMap('life_expectancy')">LifeExp</button>
+    <button onclick="map.remove(); generateMap('average_salary')">AvgSalary</button>
+    <button onclick="map.remove(); generateMap('rain')">Rain</button>
+    <button onclick="map.remove(); generateMap('temperature')">Temp</button>
+    <button onclick="map.remove(); generateMap('sun_hours')">SunH</button>
+    <button onclick="map.remove(); generateMap('average_age')">AvgAge</button>
+    <button onclick="map.remove(); generateMap('immigration')">Immigr</button> 
+    <button onclick="map.remove(); generateMap('vehicles')">Vehicles</button>
+    <button onclick="map.remove(); generateMap('companies')">Comp</button>
+    <button onclick="map.remove(); generateMap('alt_parties')">AltParties</button>
+    <button onclick="map.remove(); generateMap('cows')">Cows</button>
+    <button onclick="map.remove(); generateMap('pigs')">Pigs</button>
+    <button onclick="map.remove(); generateMap('pop_var')">PopVar</button>
+    <button onclick="map.remove(); generateMap('birth_rate')">BirthR</button>
+    <button onclick="map.remove(); generateMap('tourists')">Tourists</button>
+    <button onclick="map.remove(); generateMap('dropout')">Dropout</button>
+    <canvas id="chart-area"></canvas>
 </body>
 <script type="text/javascript" src="js/spain_provs.js"></script>
 <script type="text/javascript" src="js/datasets/population.js"></script>
@@ -56,6 +62,8 @@
 <script type="text/javascript" src="js/datasets/tourists2017.js"></script>
 <script type="text/javascript" src="js/datasets/dropout_rate2008.js"></script>
 <script type="text/javascript" src="js/map_generation.js"></script>
+<script type="text/javascript" src="js/chart_generation.js"></script>
 <!--<script>window.onload = moveIslands()</script>-->
-<script>window.onload = generate('population')</script>
+<script>window.onload = generateMap('population')</script>
+<script>window.onload = createChart()</script>
 </html>

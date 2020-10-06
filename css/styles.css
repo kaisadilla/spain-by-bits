@@ -1,7 +1,15 @@
 #map-area {
     height: 700px;
     width: 1000px;
+    border: 1px solid black;
 }
+
+#chart-area {
+    height: 500px;
+    width: 800px;
+    border: 1px solid black;
+}
+
 .info {
     padding: 6px 8px;
     font: 14px/16px Arial, Helvetica, sans-serif;
